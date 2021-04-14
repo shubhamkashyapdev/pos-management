@@ -2,7 +2,7 @@ import express from 'express';
 import dotenv from 'dotenv';
 import colors from 'colors';
 import helmet from 'helmet';
-import path from 'path';
+import morgan from 'morgan';
 
 import connectDB from './database/db.js';
 dotenv.config();
@@ -10,11 +10,13 @@ dotenv.config();
 const app = express();
 connectDB();
 
-console.log(process.env.PORT);
-
 // middlewares //
-app.use(helmet);
+app.use(helmet());
 app.use(express.json());
+
+if (process.env.NODE_ENV === 'development') {
+  app.use(morgan('dev'));
+}
 
 // routes //
 
