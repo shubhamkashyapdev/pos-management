@@ -9,7 +9,8 @@ import ErrorHandler from './middleware/errorHandler.js';
 dotenv.config();
 
 // routes //
-import userRoutes from './routes/authRoute.js';
+import authRoutes from './routes/authRoute.js';
+import userRoutes from './routes/usersRoute.js';
 
 const app = express();
 connectDB();
@@ -23,7 +24,9 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 // routes //
-app.use('/api/auth', userRoutes);
+app.use('/api/auth', authRoutes);
+app.use(ErrorHandler);
+app.use('/api/users', userRoutes);
 app.use(ErrorHandler);
 
 const PORT = process.env.PORT || 5000;
