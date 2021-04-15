@@ -5,7 +5,11 @@ import helmet from 'helmet';
 import morgan from 'morgan';
 
 import connectDB from './database/db.js';
+import ErrorHandler from './middleware/errorHandler.js';
 dotenv.config();
+
+// routes //
+import userRoutes from './routes/userRoute.js';
 
 const app = express();
 connectDB();
@@ -19,6 +23,8 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 // routes //
+app.use('/api/users', userRoutes);
+app.use(ErrorHandler);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () =>

@@ -27,8 +27,9 @@ const errorHandler = (err, req, res, next) => {
 
   res.status(error.status || 500).json({
     success: false,
+    status: error.status,
     error: error.message || 'Server Error',
   });
 };
 
-module.exports = errorHandler;
+export default errorHandler;
