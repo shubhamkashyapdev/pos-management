@@ -1,4 +1,3 @@
-'use strict';
 import mongoose from 'mongoose';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
@@ -53,6 +52,11 @@ UserSchema.methods.getToken = async function () {
     expiresIn: `${process.env.JWT_EXPIRE}`,
   });
   return token;
+};
+
+// match user entered password to hashed password in the database //
+UserSchema.methods.matchPassword = async function (password) {
+  return await bcrypt.compare(password, this.password);
 };
 
 const User = mongoose.model('User', UserSchema);
