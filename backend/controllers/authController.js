@@ -34,10 +34,9 @@ export const getUser = asyncHandler(async (req, res, next) => {
 // @route   POST /api/users
 // @access  Private
 export const addUser = asyncHandler(async (req, res, next) => {
-  const { fullName, username, email, password } = req.body;
+  const { fullName, username, email, password, role } = req.body;
   let user = await User.findOne({ username });
   if (user) {
-    console.log(user);
     return next(new ErrorResponse(`User Already Exists`, 400));
   }
   user = await User.create({
@@ -45,6 +44,7 @@ export const addUser = asyncHandler(async (req, res, next) => {
     email,
     password,
     username,
+    role,
   });
   // send token //
   sendTokenResponse(user, 201, res);

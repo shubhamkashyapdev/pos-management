@@ -11,6 +11,7 @@ dotenv.config();
 // routes //
 import authRoutes from './routes/authRoute.js';
 import userRoutes from './routes/usersRoute.js';
+import productRoutes from './routes/productRoute.js';
 
 const app = express();
 connectDB();
@@ -27,6 +28,8 @@ if (process.env.NODE_ENV === 'development') {
 app.use('/api/auth', authRoutes);
 app.use(ErrorHandler);
 app.use('/api/users', userRoutes);
+app.use(ErrorHandler);
+app.use('/api/products', productRoutes);
 app.use(ErrorHandler);
 
 const PORT = process.env.PORT || 5000;
