@@ -8,6 +8,7 @@ import {
   addProduct,
   updateProductById,
   deleteProductById,
+  productPhotoUpload,
 } from '../controllers/productController.js';
 const router = express.Router();
 
@@ -20,5 +21,9 @@ router
   .get(getSingleProduct)
   .put(protect, authorize('admin', 'cashier'), updateProductById)
   .delete(protect, authorize('admin', 'cashier'), deleteProductById);
+
+router
+  .route('/:id/image')
+  .put(protect, authorize('admin', 'cashier'), productPhotoUpload);
 
 export default router;
