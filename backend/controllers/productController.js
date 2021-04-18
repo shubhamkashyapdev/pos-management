@@ -1,15 +1,15 @@
 import path from 'path';
-import express from 'express';
 
 import asyncHandler from 'express-async-handler';
 import Product from '../models/productModel.js';
+import Review from '../models/reviewModel.js';
 import ErrorResponse from '../utils/errorResponse.js';
 
 // desc     fetch all products
 // req      GET /api/products
 // access   public
 export const getAllProducts = asyncHandler(async (req, res, next) => {
-  const products = await Product.find({});
+  const products = await Product.find({}).populate('reviews', '');
   res.status(200).json({
     successs: true,
     status: 200,

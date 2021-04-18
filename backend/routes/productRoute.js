@@ -12,6 +12,10 @@ import {
 } from '../controllers/productController.js';
 const router = express.Router();
 
+// redirect routes //
+import reviewRouter from './reviewsRoute.js';
+router.use('/:productId/reviews', reviewRouter);
+
 router
   .route('/')
   .get(getAllProducts)

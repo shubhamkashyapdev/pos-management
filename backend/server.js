@@ -21,6 +21,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 import authRoutes from './routes/authRoute.js';
 import userRoutes from './routes/usersRoute.js';
 import productRoutes from './routes/productRoute.js';
+import reviewsRoute from './routes/reviewsRoute.js';
 
 const app = express();
 connectDB();
@@ -48,10 +49,9 @@ if (process.env.NODE_ENV === 'development') {
 
 // routes //
 app.use('/api/auth', authRoutes);
-app.use(ErrorHandler);
 app.use('/api/users', userRoutes);
-app.use(ErrorHandler);
 app.use('/api/products', productRoutes);
+app.use('/api/reviews', reviewsRoute);
 app.use(ErrorHandler);
 
 const PORT = process.env.PORT || 5000;
